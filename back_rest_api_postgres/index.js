@@ -3,26 +3,7 @@ const database = require('./services/database');
 
 const app = express();
 
-// Gets all users from the database
-app.get('/users', async (req, res) => {
-    try{
-        const result = await database.pool.query( 'SELECT * FROM users');
-        return res.status(200).json(result.rows);
-    } catch (error) {
-        return res.status(500).json({error: error.message})
-    }
-})
-
-// Gets user by id from the database
-app.get('/users/:id', async (req, res) => {
-    try {
-        const id = req.params.id;
-        const result = await database.pool.query('SELECT * FROM users WHERE id = $1', [id]);
-        return res.status(200).json(result.rows);
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
-})
+app.use(require('./routes/userRoute'));
 
 // Gets all stuff from the database
 app.get('/stuff', async (req, res) => {

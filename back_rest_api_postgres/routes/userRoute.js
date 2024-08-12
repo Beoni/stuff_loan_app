@@ -1,0 +1,9 @@
+const router = require('express').Router()
+const userController = require('../controllers/userController')
+// Gets all users from the database
+router.get('/users', userController.getAllUsers)
+
+// Gets user by id from the database
+router.get('/users/:id', userController.getUserById) 
+
+module.exports = router
