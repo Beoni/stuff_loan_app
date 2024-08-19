@@ -4,6 +4,8 @@ const userController = require('../controllers/userController')
 router.get('/users', userController.getAllUsers)
 
 // Gets user by id from the database
-router.get('/users/:id', userController.getUserById) 
+router.get('/users/:id', userController.getUserById)
+
+router.post('/users', userController.createUser)
 
 module.exports = router
