@@ -25,23 +25,24 @@ exports.getUserById = async (req, res) => {
 // Create a new user
 exports.createUser = async (req, res) => {
     try {
-        if (!req.body.name || !req.body.password) {
+        const { name, password } = req.body;
+        if (!name || !password) {
             return res.status(422).json({ error: 'name and password are required' });
         }
 
         // Check if user already exists and returns informative mesaage if true
         const existisUser = await database.pool.query({
             text: 'SELECT EXISTS (SELECT * FROM users WHERE name = $1)',
-            values: [req.body.name]
+            values: [name]
         })
         
         if (existisUser.rows[0].exists) {
-            return res.status(409).json({ error: `user name ${req.body.name} already exists` });
+            return res.status(409).json({ error: `user name ${name} already exists` });
         }
 
         const result = await database.pool.query({
             text: 'INSERT INTO users (name, password) VALUES ($1, $2) RETURNING *',
-            values: [req.body.name, req.body.password]
+            values: [name, password]
         })
 
         return res.status(201).json(result.rows[0]);
