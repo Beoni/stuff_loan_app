@@ -1,5 +1,6 @@
 const database = require('../services/database');
 
+// Method to get all loans with user and stuff data
 exports.getAllLoans = async (req, res) => {
     try {
         const result = await database.pool.query(`
@@ -21,6 +22,7 @@ exports.getAllLoans = async (req, res) => {
     }
 }
 
+// Method to get loan data by id allso with user and stuff data
 exports.getLoanById = async (req, res) => {
     try {
         const id = req.params.id;

@@ -1,5 +1,6 @@
 const database = require('../services/database');
 
+// Method to get all stuff data
 exports.getAllStuff = async (req, res) => {
     try {
         const result = await database.pool.query('SELECT * FROM stuff');
@@ -9,6 +10,7 @@ exports.getAllStuff = async (req, res) => {
     }
 }
 
+// Method to get stuff data by id
 exports.getStuffById = async (req, res) => {
     try {
         const id = req.params.id;
