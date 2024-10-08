@@ -16,6 +16,9 @@ router.put('/users/password/:id', userController.updateUserPassword)
 // Update user name
 router.put('/users/name/:id', userController.updateUserName)
 
+// Update user role
+router.put('/users/role/:id', userController.updateUserRole)
+
 // Delete user
 router.delete('/users/:id', userController.deleteUser) 
 
