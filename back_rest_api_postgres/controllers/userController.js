@@ -1,10 +1,16 @@
 const e = require('express');
 const database = require('../services/database');
 
+
 // Method to get all users
 exports.getAllUsers = async (req, res) => {
     try {
         const result = await database.pool.query('SELECT * FROM users');
+
+        // Check if there is no data
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: 'no data found' });
+        }
         return res.status(200).json(result.rows);
     } catch (error) {
         return res.status(500).json({ error: error.message })
@@ -15,8 +21,18 @@ exports.getAllUsers = async (req, res) => {
 exports.getUserById = async (req, res) => {
     try {
         const id = req.params.id;
+
+        // Check if id is provided
+        if (!id) {
+            return res.status(422).json({ error: 'id is required' });
+        }
         const result = await database.pool.query('SELECT * FROM users WHERE id = $1', [id]);
+        // Check if id exists
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: 'user not found' });
+        }
         return res.status(200).json(result.rows);
+
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
@@ -81,7 +97,7 @@ exports.updateUserPassword = async (req,res) => {
             return res.status(404).json({ error: 'user not found' })
         }
 
-        return res.status(200).json(result.rows[0]);
+        return res.status(201).json(result.rows[0]);
         
     } catch (error) {
         return res.status(500).json({ error: error.message });
@@ -131,16 +147,23 @@ exports.updateUserRole = async (req,res) => {
     try {
         const id = req.params.id;
         const role = req.body.role;
+
         // Check if role is provided
         if (!role) {
             return res.status(422).json({ error: 'role is required' })
         } 
+
+        // Check if role is valid
+        if (role !== 'admin' && role !== 'user') {
+            return res.status(422).json({ error: 'role must be admin or user' })
+        }
         
         const result = await database.pool.query({
             text: 'UPDATE users SET role = $1 WHERE id = $2 RETURNING *',
             values: [role, id]
         })   
 
+        // Check if id exists
         if (result.rowCount === 0) {
             return res.status(404).json({ error: 'user not found' })
         }
@@ -160,6 +183,8 @@ exports.deleteUser = async (req,res) => {
             text: 'DELETE FROM users WHERE id = $1 RETURNING *',
             values: [id]
         })
+        
+        // Check if id exists
         if (result.rowCount === 0) {
             return res.status(404).json({ error: 'user not found' })
         }
