@@ -190,7 +190,12 @@ exports.deleteLoan = async (req, res) => {
         const result = await database.pool.query(`
             DELETE FROM loan_events WHERE id = $1 RETURNING *
         `, [id]);
-        return res.status(200).json(result.rows)
+        // Check if id exists
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: 'loan not found' });
+        }
+         // 204 No Content
+         return res.status(204).send();
     } catch (error) {
         return res.status(500).json({ error: error.message })
     }
