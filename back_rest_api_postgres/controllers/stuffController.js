@@ -90,9 +90,9 @@ exports.updateStuff = async (req, res) => {
             fields.push('quantity');
             values.push(quantity);
         }
-
+        // Check if there are fields to update
         if (fields.length === 0) {
-            return res.status(422).json({ error: 'At least one field is required to update' });
+            return res.status(422).json({ error: 'No fields to update' });
         }
 
         fields.forEach((field, index) => {
