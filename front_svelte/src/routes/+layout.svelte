@@ -1,27 +1,58 @@
-<nav>
-    <a href="/">Home</a>
-    <a href="/login">Login</a>
-    <a href="/stuff_list">Stuff list</a>
-</nav>
+<script>
+	import Header from './Header.svelte';
+	import '../app.css';
 
-<slot />    
+	/** @type {{children: import('svelte').Snippet}} */
+	let { children } = $props();
+</script>
+
+<div class="app">
+	<Header />
+
+	<main>
+		{@render children()}
+	</main>
+
+	<footer>
+		<p>
+			visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to learn about SvelteKit
+		</p>
+	</footer>
+</div>
 
 <style>
-    nav {
-        position:relative;
-        display: flex;
-        gap: 1em;
-        justify-content: left;
-        padding: 1em;
-        background: #f4f4f4;
-        font-size: 1.2em;
-    }
+	.app {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
 
-    nav a {
-        text-decoration: none;
-    }   
+	main {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		padding: 1rem;
+		width: 100%;
+		max-width: 64rem;
+		margin: 0 auto;
+		box-sizing: border-box;
+	}
 
-    nav a:hover {
-        text-decoration: underline;
-    }
+	footer {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 12px;
+	}
+
+	footer a {
+		font-weight: bold;
+	}
+
+	@media (min-width: 480px) {
+		footer {
+			padding: 12px 0;
+		}
+	}
 </style>
