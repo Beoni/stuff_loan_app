@@ -11,12 +11,12 @@
         const response = await fetch("http://localhost:3000/stuff");
         if (response.ok) {
           const data = await response.json();
-          items = data;
+          items = [...data];
         } else {
-          console.error("API-pyyntö epäonnistui", response.status);
+          console.error("API request failed", response.status);
         }
       } catch (error) {
-        console.error("Virhe API:n hakemisessa", error);
+        console.error("Error fetching data from the API", error);
       }
     };
   

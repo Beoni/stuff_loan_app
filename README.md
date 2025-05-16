@@ -9,3 +9,4 @@ Dev routes
 - React route  ->           http://localhost:5174/
 - Svelte route ->           http://localhost:5173/
 - Back rest api route ->    http://localhost:3000/stuff
+npm 
