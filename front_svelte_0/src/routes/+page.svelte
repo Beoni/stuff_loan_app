@@ -8,7 +8,7 @@
     <title>Tuotelistaus</title>
 </svelte:head>
 
-<h1>Tuotelistaus</h1>
+<h1>Tuotelistaus Svelte</h1>
     <table >
       <thead>
         <tr>
