@@ -27,7 +27,7 @@ export default function FetchData() {
                 <p>Loading...</p> 
             ) : (
                 <div>
-                    <h1>Tuotelistaus</h1>
+                    <h1>Tuotelistaus Vite + React</h1>
                     <table style = {{ border: 1, styke: "boarder-collapse: collapse"}}>
                         <thead>
                             <tr>
@@ -43,7 +43,7 @@ export default function FetchData() {
                                     <td>{stuff.id}</td>
                                     <td>{stuff.name}</td>
                                     <td>{stuff.description}</td>
-                                    <td>{stuff.amount}</td>
+                                    <td>{stuff.quantity}</td>
                                 </tr>
                             ))}
                         </tbody>

@@ -3,7 +3,7 @@ const database = require('../services/database');
 // Method to get all stuff data
 exports.getAllStuff = async (req, res) => {
     try {
-        const result = await database.pool.query('SELECT * FROM stuff');
+        const result = await database.pool.query('SELECT * FROM stuff LIMIT 50000');
 
         // Check if there is no data
         if (result.rowCount === 0) {

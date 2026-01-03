@@ -1,8 +1,8 @@
 Svelte vs React
 ---
-Run commands 
-- React Vite front ->       npm run dev
-- Svelte Kit front ->       npm run dev
+Run commands                DEV ENV      CREATE BUILD   VIEW BUILD 
+- React Vite front ->       npm run dev, npm run build, npm run preview
+- Svelte Kit front ->       npm run dev, npm run build, npm run preview 
 - Nodejs Express Api ->     node index.js
 ---
 Dev routes
